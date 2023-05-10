@@ -1,20 +1,40 @@
-import ebay
 import amazone
+import ebay
+import random
 from amazone import depure_conten as amazone_articulos
 from ebay import depure_conten as ebay_articulos
 
+# Funcion para mezclar el orden de los articulos
+def mezclador_articulos(lista_original):
+    orden = list()
+    for i in range(len(lista_original)):
+        orden.append(i)
+    print(orden)
+    random.shuffle(orden)
+    print(orden)
+
+    lista_mezclada = list()
+    for x in orden:
+        lista_mezclada.append(lista_original[x])
+
+    return lista_mezclada
+
+# Entrada del Usuario
 arti = input("Que Articulo buscas: ")
-ebay = ebay.ebayscrao(arti)
+
+# Ejecutando el llamado de los articulos
+ebay.ebayscrao(arti)
 amazone.amascrap(arti)
 
+# Fucionando las Diccionarios para luego mezclar el orden de presentación
+show_articulos = amazone_articulos + ebay_articulos
 
-amazone_items = amazone_articulos
-ebay_items = ebay_articulos
+# Diccionario Final
+final_list = mezclador_articulos(show_articulos)
 
-print("Articulos Ebay")
-for show in ebay_items:
-    print(show)
+# Prueba de Orden
+for x in final_list:
+    print(x)
 
-print("Articulos Amazone")
-for show in amazone_items:
-    print(show)
+
+
